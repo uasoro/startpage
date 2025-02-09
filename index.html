@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link id="theme-style" rel="stylesheet" href="green.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="theme-button" onclick="toggleMenu()">★</button>
+    <div class="theme-menu" id="theme-menu">
+        <button onclick="setTheme('green.css')"># Green</button>
+        <button onclick="setTheme('blue.css')"># Blue</button>
+        <button onclick="setTheme('gruvbox.css')"># Gruvbox</button>
+    </div>
+    <div class="container">
+        <div class="clock" id="clock"></div>
+        <div class="search">
+            <form action="https://www.google.com/search" method="GET">
+                <input type="text" name="q" placeholder="> Search Google..." autocomplete="off" autocorrect="off" onfocus="this.value=''">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="bookmarks">
+            <div class="category">
+                <h2># General</h2>
+                <ul>
+                    <li><a href="https://chatgpt.com/"><img src="./icons/chatgpt.svg">GPT</a></li>
+                    <li><a href="https://chat.deepseek.com/"><img src="./icons/deepseek.svg">DeepSeek</a></li>
+                    <li><a href="https://www.youtube.com/"><img src="./icons/youtube.svg">YouTube</a></li>
+                    <li><a href="https://www.deepl.com/"><img src="./icons/deepl.svg">DeepL</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h2># Dev</h2>
+                <ul>
+                    <li><a href="https://github.com/"><img src="./icons/github.svg">GitHub</a></li>
+                    <li><a href="https://about.gitlab.com/"><img src="./icons/gitlab.svg">GitLab</a></li>
+                    <li><a href="https://stackoverflow.com/questions"><img src="./icons/stackoverflow.svg">Stack</a></li>
+                    <li><a href="https://www.codewars.com/"><img src="./icons/codewars.svg">Codewars</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h2># Game</h2>
+                <ul>
+                    <li><a href="https://store.steampowered.com/"><img src="./icons/steam.svg">Steam</a></li>
+                    <li><a href="https://store.epicgames.com/"><img src="./icons/epic-games.svg">Epic</a></li>
+                    <li><a href="https://osu.ppy.sh/"><img src="./icons/osu.svg">osu!</a></li>
+                    <li><a href="https://itch.io/"><img src="./icons/itch-io.svg">Itch.io</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function toggleMenu() {
+            document.getElementById('theme-menu').classList.toggle('active');
+        }
+
+        function setTheme(theme) {
+            document.getElementById('theme-style').setAttribute('href', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.getElementById('theme-style').setAttribute('href', savedTheme);
+            }
+        });
+    </script>
+</body>
+</html>
